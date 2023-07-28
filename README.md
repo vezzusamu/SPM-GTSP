@@ -1,22 +1,9 @@
 # Travelling-Salesman-Problem
 Genetic algorithm in C++ to solve the TSP problem.
 
-## Problem statement 
-Given a list of cities and the distances between each pair of cities, what is the shortest possible route that visits each city and returns to the origin city?
-
-## Constraint 
-TSP in an NP problem.<br/>
-Learn about NP problems: http://mathworld.wolfram.com/NP-Problem.html
-
-## Idea
-Use a genetic algorithm to solve the problem.<br/>
-Learn about genetic algorithms: https://towardsdatascience.com/introduction-to-genetic-algorithms-including-example-code-e396e98d8bf3
-
-Use a String to represent the order in which the towns/nodes are visited.<br/>
-As a simplification we can enumerate the towns/nodes so that the string is any permutation of :
-1234…numberOfCities for problems with numberOfCities nodes.
-
-Note: if the citiesDistances is not connected then we can
-artificially introduce an infinite weighting between any 2
-nodes that are not directly connected.
+## Abstract
+    The Traveling Salesman Problem [TSP] is an NP-Hard problem, its aim is to find the shortest path to visit a set of cities exactly once and return to the starting city. Because of its complexity, it cannot be solved in polynomial time. The solution will be approximated, in the case of this project a genetic algorithm has been used.
+    The algorithm used starts from a randomly generated population , where each chromosome represents a possible path, and for each iterations it applies three genetic operators to the population.
+    The three genetic operators applied are: selection, crossover, and mutation. The algorithm has been implemented in a Sequential version, a Native threads
+    version and a version based on FastFlow.
 
