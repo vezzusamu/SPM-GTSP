@@ -1,4 +1,4 @@
-# Install script for directory: /Users/svezzuto/Documents/SPM/SPM_Workspace/Travelling-Salesman-Problem-master
+# Install script for directory: /Users/svezzuto/Downloads/tsp_project_final 6
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/svezzuto/Documents/SPM/SPM_Workspace/Travelling-Salesman-Problem-master/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/svezzuto/Downloads/tsp_project_final 6/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

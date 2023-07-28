@@ -15,6 +15,39 @@ private:
     std::vector<Chromosome> pathsWithLength;
     int chromosomeDimension;
 
+    //PMX Partially mapped crossover
+    vector<Chromosome> calculateCrossoverPathPMX(vector<int> &path1, vector<int> &path2) // Complexity O(numberOfCities)
+    {
+        vector<int> returnPath1;
+        vector<int> returnPath2;
+        returnPath1.resize(numberOfCities_);
+        returnPath2.resize(numberOfCities_);
+
+        int indexesOfPath1Cities[numberOfCities_];
+        for(int i=0; i < numberOfCities_; i++)
+        {
+            indexesOfPath1Cities[path1[i]] = i;
+            returnPath1[i] = path1[i];
+        }
+
+        int indexesOfPath2Cities[numberOfCities_];
+        for(int i=0; i < numberOfCities_; i++)
+        {
+            indexesOfPath2Cities[path2[i]] = i;
+            returnPath2[i] = path2[i];
+        }
+
+        int idx = rand() % numberOfCities_ - 1;
+
+        for (int i = 0; i < idx; i++) {
+            int pathApp1 = indexesOfPath1Cities[path2[i]];
+            int pathApp2 = indexesOfPath2Cities[path1[i]];
+            std::swap(returnPath1[pathApp1], returnPath1[i]);
+            std::swap(returnPath2[pathApp2], returnPath2[i]);
+        }
+        return {make_pair(returnPath1, 0), make_pair(returnPath2, 0)};
+    }
+
 public:
     void generateFirstChromosomes() {
         auto start = std::chrono::system_clock::now();
@@ -31,8 +64,7 @@ public:
         timeToGenerateRandomPath += std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
     }
 
-    void evaluateAndSortChromosomes() {// Complexity O( chromosomeDimension * log²(chromosomeDimension))
-        // Complexity without memoization O(chromosomeDimension * numberOfCities * log(chromosomeDimension))
+    void evaluateAndSortChromosomes() {
         auto start_evaluate = std::chrono::system_clock::now();
         for (int i = 0; i < pathsWithLength.size(); i++) {
             auto app = calculateFitnessForPath(pathsWithLength[i].first);
@@ -42,7 +74,6 @@ public:
         auto start_sort = std::chrono::system_clock::now();
         sort(pathsWithLength.begin(), pathsWithLength.end(), minimalLengthComparatorPair);
 
-        //We keep the chromosomeDimension of the desired size, removing the worst paths
         if (chromosomeDimension >= (int)pathsWithLength.size()) return;
         int app = pathsWithLength.size() - chromosomeDimension;
         for(int i=0 ; i < (app); ++i)
@@ -53,16 +84,16 @@ public:
     }
 
 
-    //This function will calculate the new population by applying the crossover
     void calculateChromosomesCrossover() {
         auto start = std::chrono::system_clock::now();
         vector<Chromosome> appPush;
         appPush.clear();
         appPush.reserve(pathsWithLength.size());
         for (int i = 0; i < pathsWithLength.size() - 1; i+=2) {
-            pair<vector<int>,int > app = calculateCrossoverPath(pathsWithLength[i].first,
+            auto app = calculateCrossoverPathPMX(pathsWithLength[i].first,
                                                                 pathsWithLength[i + 1].first);
-            appPush.push_back(app);
+            appPush.push_back(app[0]);
+            appPush.push_back(app[1]);
         }
         pathsWithLength.insert(pathsWithLength.end(), appPush.begin(), appPush.end());
 
@@ -101,7 +132,7 @@ public:
     }
 
     SequentialCalculator(int chromosomeDimension)
-            : chromosomeDimension(chromosomeDimension){
+    : chromosomeDimension(chromosomeDimension){
     }
 };
 

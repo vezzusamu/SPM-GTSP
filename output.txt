@@ -1,0 +1,1 @@
+type,tot,eval,sort,cross,mut,rand,cities,chromo,it,threads

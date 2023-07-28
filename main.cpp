@@ -15,7 +15,6 @@
 using namespace std;
 
 int maxIterations = 0;
-// chromosomeDimension is the number of individuals in the population, they represent the number of paths
 int nextPercentageToPrint = 0;
 
 void printCompletionPercentage(int timeElapsed, int iterationNumber) {
@@ -28,22 +27,14 @@ void printCompletionPercentage(int timeElapsed, int iterationNumber) {
 
 
 int main(int argc, char *argv[]) {
-    unsigned int numThreads = std::thread::hardware_concurrency();
-    Utils utils = Utils(98765);
-
-    if (numThreads == 0) {
-        std::cout << "Unable to determine the number of threads supported by the system." << std::endl;
-    } else {
-        std::cout << "Number of available threads: " << numThreads << std::endl;
-    }
-    std::cout<<std::endl;
+    Utils utils = Utils();
 
     //Default values
     int chromosomeDimension = 2000;
-    int calculatorType = 0;
-    int numberOfWorkers = 1;
-    int numberOfCities = 500;
-    int mutationPercentage = 30; //atoi(argv[1]);
+    int calculatorType = 1;
+    int numberOfWorkers = 10;
+    int numberOfCities = 1000;
+    int mutationPercentage = 30;
     maxIterations = 10;
 
     if (argc > 6) {
@@ -93,7 +84,6 @@ int main(int argc, char *argv[]) {
     calculator->evaluateAndSortChromosomes();
 
     int iterationNumber = 1;
-    //The algorithm stops when it reaches a local minimum
     while((iterationNumber < maxIterations))
     {
         calculator->calculateChromosomesCrossover();
@@ -107,21 +97,16 @@ int main(int argc, char *argv[]) {
     calculator->printTotalTimeSpentForCalculations();
     cout << "Minimal path length calculated: " << calculator->getBestPathLength() << endl;
     std::cout << "Total time spent using "<< calculator->getCalculatorType() << calculator->getNumberOfThreads() << ": " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() << " ms" << std::endl;
-
     std::ofstream outputFile("output.txt", std::ios::app);
     if (outputFile.is_open()) {
         // Write data to the file
         outputFile << calculator->getCalculatorType() << "," << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() << "," << calculator->getElapsedTime() << "," << numberOfCities << "," << chromosomeDimension << "," << maxIterations <<"," << numberOfWorkers << std::endl;
-
-        // Close the file
         outputFile.close();
-
         std::cout << "Data written to the file successfully." << std::endl;
-    } else {
+    }
+    else {
         std::cout << "Failed to open the file." << std::endl;
     }
-
-
     return 0;
 }
 

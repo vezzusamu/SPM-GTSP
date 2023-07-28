@@ -1,0 +1,3 @@
+/Users/svezzuto/Downloads/tsp_project_final 6/cmake-build-debug/CMakeFiles/Travelling_Salesman_Problem_master.dir
+/Users/svezzuto/Downloads/tsp_project_final 6/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/svezzuto/Downloads/tsp_project_final 6/cmake-build-debug/CMakeFiles/rebuild_cache.dir

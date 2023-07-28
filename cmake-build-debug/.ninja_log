@@ -1,6 +1,3 @@
 # ninja log v5
-4	497	1685527506722100135	CMakeFiles/Travelling_Salesman_Problem_master.dir/main.cpp.o	17370233017de4a1
-498	535	1685527506762473904	Travelling_Salesman_Problem_master	cf8eb688f33a12c3
-6	702	1686148951583586850	CMakeFiles/Travelling_Salesman_Problem_master.dir/main.cpp.o	5e374254149ce46c
-7	702	1686148951583783143	CMakeFiles/Travelling_Salesman_Problem_master.dir/sequential.cpp.o	6795f0cce3d84cba
-7	764	1686148951646831576	CMakeFiles/Travelling_Salesman_Problem_master.dir/parallel.cpp.o	35779b24ab3cbf73
+4322	4498	1687383184244541862	Travelling_Salesman_Problem_master	c635a2496c943c3e
+1	4322	1687383184060552601	CMakeFiles/Travelling_Salesman_Problem_master.dir/main.cpp.o	8ac7e18ccc53838e
